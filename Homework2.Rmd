@@ -1,0 +1,190 @@
+---
+title: "Homework 2"
+author: "Andrea Marietta Leina"
+date: "27/10/2020"
+output: 
+   html_document
+---
+
+## Set the working directory
+
+```{r}
+setwd("/Users/andrea/Desktop/UEA /Classes/Econometrics /Data")
+```
+
+## Usage
+```{r} 
+library(data.table)
+library(ggplot2)
+library(stargazer)
+library(rmarkdown)
+```
+
+## Data Analysis
+```{r , echo=TRUE} 
+load("ceosal2.Rdata")
+dt.cs <- data.table(data)
+rm(data)
+```
+
+## Descriptive Statistics \
+### How many CEOs are in the sample?
+```{r} 
+nrow(dt.cs)
+```
+
+### How many CEOs have a graduate degree?
+```{r}
+dt.cs[,sum(grad)] 
+```
+alternatively 
+```{r}
+nrow(dt.cs[grad==1,])
+```
+### What is the percentage of CEOs with graduate degree?
+```{r}
+dt.cs[,mean(salary)] 
+```
+alternatively 
+```{r}
+dt.cs[,mean(grad)]
+```
+### What is the average CEO salary?
+```{r}
+dt.cs[,sum(grad)]/nrow(dt.cs) 
+```
+alternatively 
+```{r}
+mean(dt.cs[,salary])
+```
+
+### What is the mean CEO salary for those with a gradueate degree?
+```{r}
+dt.cs[grad==1, mean(salary)] 
+```
+
+### What is the mean CEO salary for those without a gradueate degree?
+```{r}
+dt.cs[grad==0, mean(salary)]
+```
+
+### How many CEOs have/don't a college degree?
+```{r}
+dt.cs[,list(n_ceo=.N), by = college]
+```
+
+### Can we say that the mean salary is statistically significant different from 800?
+```{r}
+t.test(dt.cs[, salary], mu = 800)
+```
+### Is the average salary different from CEOs with a graduate degree and those without?
+```{r}
+t.test(dt.cs[, salary] - dt.cs[,grad])
+```
+alternatively 
+```{r}
+dt.cs[,t.test(salary - grad)] 
+```
+alternatively 
+```{r}
+t.test(dt.cs[grad==0 , salary], dt.cs[grad==1, salary])
+```
+
+### Creating a table with descriptive statistics
+```{r}
+dt.cs[,list(mean_salary = mean(salary)
+           , sd_salary = sd(salary)
+           , min_salary = min(salary)
+           , max_salary = max(salary)
+           , median_salary = median(salary))]
+```
+           
+### Summary statistics for different groups
+```{r}
+dt.cs[,list(mean_salary = mean(salary)
+           , sd_salary = sd(salary)
+           , min_salary = min(salary)
+           , max_salary = max(salary)
+           , median_salary = median(salary)), by = list (grad, college)]
+```
+alternatively 
+```{r}
+stargazer(dt.cs, type="text")
+```
+in case of a subset 
+```{r}
+stargazer(dt.cs[grad==1, list(age, salary)], type="text")
+```
+
+## QUICK PLOTS
+### Histogram
+Salary
+```{r}
+qplot(data=dt.cs
+      , x=salary
+      , geom="histogram")
+```
+\
+alternatively
+```{r}
+hist(dt.cs$salary, main='Salary distribution', xlab='Salary',breaks=25)
+```
+
+      
+Age
+```{r}
+qplot(data=dt.cs
+      , x=age
+      , geom="histogram")
+```
+\
+alternatively
+```{r}
+hist(dt.cs$age, main='Age distribution', xlab='Salary',breaks=50, xlim=c(30,90))
+```
+
+
+### Scatterplot
+```{r}
+qplot(data=dt.cs
+      , x=sales
+      , y=profits
+      , geom="point")
+```
+      
+### Barplot
+graduate
+```{r}
+qplot(data=dt.cs
+     , x=factor(grad)
+     , geom= "bar")
+```
+          
+### Line 
+```{r}
+qplot(data=dt.cs
+      , x=sales
+      , y = profits
+      , geom="line")
+```
+      
+### Facet Wrap
+```{r}
+qplot(data=dt.cs
+      , x=salary
+      , geom="histogram") + facet_wrap(- dt.cs$grad)
+```
+      
+### Customizing plots
+Salary
+```{r}
+qplot(data=dt.cs
+      , x=salary
+      , geom="histogram"
+      , fill = factor(grad, levels = c(0,1), labels = c("Yes" , "No"))) +
+      theme_bw() +
+      ylim (0,50) +
+      xlim (0, 4000) +
+      labs (title = "MY PLOT", x= "CEO Salary", y="Number of CEOs", fill= "Grad. Degree")
+```
+
