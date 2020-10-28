@@ -3,7 +3,8 @@ title: "Homework 2"
 author: "Andrea Marietta Leina"
 date: "27/10/2020"
 output: 
-   html_document
+  md_document:
+    variant: markdown_github
 ---
 
 ## Set the working directory
