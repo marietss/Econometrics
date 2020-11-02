@@ -7,7 +7,7 @@ A brief summary: \
 Lab01 - Introduction to R/Rstudio. \
 Lab02 - A brief and simple summary of Data Analysis. \
 Lab03 - Simple Linear Regression. \
-&nbsp; &nbsp; &nbsp;- examples of Hypothesis Testing. \
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;- examples of Hypothesis Testing. \
 Lab04 - Multiple Regression. \
 
 Thank you to Prof. Michael Kummer (UEA) for the lecture notes and a special mention to M. Godinho de Matos (Católica Lisbon School of Business and Economics), R. Belo (Rotterdam School of Management of the Erasmus University) and  R. F. Reis (Católica Lisbon School of Business and Economics) for the labs material.
