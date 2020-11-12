@@ -18,6 +18,6 @@ Lab 10 - Matrices and Data Visualization. \
 Lab 11 - Endogeneity, IV estimator and 2SLS Estimator. \
 Lab 12 - Second week assignment -> revision of above. \
 Lab 13 - Panel data. \
-Lab 14 - Difference in difference. \
+Lab 14 - Difference in difference. 
 
 Thank you to Prof. Michael Kummer (UEA) for the lecture notes and a special mention to M. Godinho de Matos (Católica Lisbon School of Business and Economics), R. Belo (Rotterdam School of Management of the Erasmus University) and  R. F. Reis (Católica Lisbon School of Business and Economics) for the labs material.
